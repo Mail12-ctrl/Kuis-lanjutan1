@@ -1,0 +1,183 @@
+<!-- =========================
+🟢🟡🔴 MODE BUTTON FIX
+GANTI tombol mode lama jadi ini
+========================= -->
+
+<button class="modeBtn"
+onclick="setMode('mudah', event)">
+🟢 SD / Mudah
+</button>
+
+<button class="modeBtn"
+onclick="setMode('sedang', event)">
+🟡 SMP / Sedang
+</button>
+
+<button class="modeBtn"
+onclick="setMode('sulit', event)">
+🔴 SMA / Sulit
+</button>
+
+
+<script>
+
+/* =========================
+🎮 MODE FIX FINAL
+GANTI fungsi setMode lama
+========================= */
+
+function setMode(m,e){
+
+mode=m;
+
+/* reset style tombol */
+document.querySelectorAll(".modeBtn")
+.forEach(btn=>{
+
+btn.style.border="none";
+btn.style.transform="scale(1)";
+
+});
+
+/* tombol aktif */
+e.target.style.border=
+"3px solid yellow";
+
+e.target.style.transform=
+"scale(1.05)";
+
+alert("🎮 Mode dipilih: "+m);
+
+}
+
+
+/* =========================
+🚀 START FIX
+GANTI function start()
+========================= */
+
+function start(){
+
+/* default mode */
+if(!mode){
+
+mode="mudah";
+
+}
+
+/* reset */
+level=1;
+
+coin=0;
+
+nyawa=3;
+
+/* musik */
+document.getElementById("bgm").play();
+
+/* setup soal sesuai mode */
+setupSoal();
+
+/* story */
+tampilStory();
+
+/* pindah */
+pindah("menu","story");
+
+}
+
+
+/* =========================
+🌍 PLANET FIX
+GANTI function mulaiPlanet()
+========================= */
+
+function mulaiPlanet(lv){
+
+level=lv;
+
+/* soal sesuai mode */
+setupSoal();
+
+/* bg */
+updatePlanetBg();
+
+/* story */
+tampilStory();
+
+/* pindah */
+pindah("map","story");
+
+}
+
+
+/* =========================
+📚 SETUP SOAL FIX
+PASTIKAN function ini ada
+========================= */
+
+function setupSoal(){
+
+let mudah=[
+
+{t:"5 + 3 = ?",o:["6","7","8","9"],b:2},
+
+{t:"Ibukota Indonesia?",o:["Jakarta","Bandung","Medan","Bali"],b:0},
+
+{t:"10 x 2 = ?",o:["10","20","30","40"],b:1},
+
+{t:"Planet tempat manusia tinggal?",o:["Mars","Venus","Bumi","Jupiter"],b:2}
+
+];
+
+let sedang=[
+
+{t:"Turunan x²?",o:["x","2x","x²","2"],b:1},
+
+{t:"Akar 144?",o:["10","11","12","13"],b:2},
+
+{t:"Luas lingkaran?",o:["πr²","2πr","s²","p×l"],b:0},
+
+{t:"Planet terbesar?",o:["Mars","Bumi","Jupiter","Venus"],b:2}
+
+];
+
+let sulit=[
+
+{t:"Integral x dx?",o:["x²/2","x²","2x","ln x"],b:0},
+
+{t:"Hukum Newton II?",o:["F=ma","E=mc²","V=IR","P=mv"],b:0},
+
+{t:"Unsur Fe?",o:["Besi","Emas","Perak","Karbon"],b:0},
+
+{t:"Sinonim abstrak?",o:["Nyata","Tak nyata","Jelas","Konkret"],b:1}
+
+];
+
+/* pilih soal sesuai mode */
+if(mode=="mudah"){
+
+soalList=mudah;
+
+}
+
+else if(mode=="sedang"){
+
+soalList=sedang;
+
+}
+
+else{
+
+soalList=sulit;
+
+}
+
+/* acak */
+soalList.sort(()=>Math.random()-0.5);
+
+indexSoal=0;
+
+}
+
+  </script>
